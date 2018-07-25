@@ -26,7 +26,7 @@
                                 <p><a class="waves-effect waves-light btn" href="{{ route('products.create') }}"> <i class="material-icons left">add</i>Create New Product</a></p>
                             @endcan
                         </div>
-                        <table class="striped">
+                        <table class="striped bordered ">
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>

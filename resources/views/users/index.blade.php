@@ -27,7 +27,7 @@
                         </div>
 
 
-                        <table class="striped">
+                        <table class="striped bordered ">
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
