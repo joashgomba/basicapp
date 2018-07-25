@@ -39,7 +39,7 @@
                     <ul class="left topnav-Menu-ls hide-on-med-and-down">
                         <li><a class="morph small iconizedToggle waves-effect waves-light" href="javascript:void(0)"><span><span class="s1"></span><span class="s2"></span><span class="s3"></span></span></a>
                         </li>
-                        <li><a href="#">Document</a></li>
+                        <!--<li><a href="#">Document</a></li>-->
                     </ul>
                     <ul class="right">
                         <li class="hide-on-med-and-down"><a class="waves-effect waves-set app-search-btn" href="#"><i class="material-icons">search</i></a></li>
@@ -99,7 +99,7 @@
     </div>
     <div class="vertical-navigations animated">
         <ul class="side-nav fixed animated collapsible collapsible-accordion" id="nav-default">
-            <li class="logo"><a class="brand-logo hide-on-large-only" id="logo-container" href="http://hexesis.com/"></a></li>
+            <li class="logo"><a class="brand-logo hide-on-large-only" id="logo-container" href="#"></a></li>
             <li class="usr-profile">
                 <div class="usr-profile-header"><a href="#"><img class="circle" src="{{ asset('images/square/male_6.jpg') }}" alt="Thor"></a></div>
                 <ul class="user-options">
@@ -111,15 +111,23 @@
                             <i class="material-icons">power_settings_new</i></a></li>
                 </ul>
             </li>
-            <li><a class="collapsible-header no-col-body waves-effect waves-set" href="{{ route('home') }}"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
-            <li><a class="collapsible-header no-col-body waves-effect waves-set" href="{{ route('products.index') }}"><i class="material-icons">view_list</i><span>Products</span></a></li>
+
+            @php
+                $route = Route::currentRouteName()
+
+            @endphp
+
+
+            <li><a class="collapsible-header no-col-body waves-effect waves-set @if ($route == 'home') active current @endif " href="{{ route('home') }}"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>
+
+            <li><a class="collapsible-header no-col-body waves-effect waves-set @if ($route == 'products.index' || $route == 'products.create' || $route == 'products.edit' || $route == 'products.show') active current @endif" href="{{ route('products.index') }}"><i class="material-icons">view_list</i><span>Products</span></a></li>
 
             @role('Super Admin')
-            <li><a class="collapsible-header waves-effect waves-set" href="#"><i class="material-icons">person</i><span>Users</span><i class="material-icons mdi-navigation-chevron-left">keyboard_arrow_left</i></a>
+            <li><a class="collapsible-header waves-effect waves-set @if ($route == 'roles.index' || $route == 'roles.create' || $route == 'roles.edit'|| $route == 'roles.show' || $route == 'users.index' || $route == 'users.create' || $route == 'users.edit'|| $route == 'users.show') active current @endif" href="#"><i class="material-icons">person</i><span>Users</span><i class="material-icons mdi-navigation-chevron-left">keyboard_arrow_left</i></a>
                 <div class="collapsible-body">
                     <ul>
-                        <li class="menu-item"><a class="waves-effect waves-set" href="{{ route('roles.index') }}"><span>Manage Roles</span></a></li>
-                        <li class="menu-item"><a class="waves-effect waves-set" href="{{ route('users.index') }}"><span>Manage Users</span></a></li>
+                        <li class="menu-item"><a class="waves-effect waves-set @if ($route == 'roles.index' || $route == 'roles.create' || $route == 'roles.edit'|| $route == 'roles.show') active current @endif" href="{{ route('roles.index') }}"><span>Manage Roles</span></a></li>
+                        <li class="menu-item"><a class="waves-effect waves-set @if ($route == 'users.index' || $route == 'users.create' || $route == 'users.edit'|| $route == 'users.show') active current @endif" href="{{ route('users.index') }}"><span>Manage Users</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -142,6 +150,8 @@
         <div class="sec-breadcrumb">
             <nav class="breadcrumbs-nav left">
                 <div class="nav-wrapper">
+
+
                     <?php $segments = ''; ?>
 
                     <div class="col s12">
@@ -149,7 +159,7 @@
                         @foreach(Request::segments() as $segment)
                             <?php $segments .= '/'.$segment; ?>
 
-                                <a class="breadcrumb" href="{{ $segments }}">{{$segment}}</a>
+                                <a class="breadcrumb" href="{{ $segments }}">{{strtoupper($segment)}}</a>
                             @endforeach
                         <!--<a class="breadcrumb" href="">Home</a><a class="breadcrumb" href="#">Icons</a>-->
                     </div>
@@ -163,13 +173,18 @@
     <!-- FOOTER-->
     <footer class="page-footer no-mrpd grey lighten-4">
         <div class="footer-copyright">
-            <div class="container primary-text">© 2017 Forge, All rights reserved.
+            <div class="container primary-text">© 2017 All rights reserved.
             </div>
         </div>
     </footer>
 </main>
 <!-- SCRIPTS-->
 <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $(".basic-select").material_select();
+    });
+</script>
 </body>
 
 </html>

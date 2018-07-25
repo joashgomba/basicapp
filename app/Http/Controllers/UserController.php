@@ -35,6 +35,27 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
+        /**
+        return View::make('user/regprofile', array
+            (
+                'students'    =>  $students,
+                'variable_1'  =>  $variable_1,
+                'variable_2'  =>  $variable_2
+            )
+        );
+         *  $data = array('idarray' => $idarray);
+        return \View::make('resultoneproject', $data);
+         *
+         * $data = array(
+        'title'=>'My App',
+        'Description'=>'This is New Application',
+        'author'=>'foo'
+        );
+        return view('welcome')->with($data);
+         *
+         *
+
+        **/
     }
 
 
